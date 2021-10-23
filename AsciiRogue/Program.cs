@@ -9,6 +9,7 @@ namespace AsciiRogue
         {
             GameMap map = new GameMap(); 
             map.printMap();
+            Console.Read();
         }
     }
 }
