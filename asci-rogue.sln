@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiRogueLib", "AsciiRogueLib\AsciiRogueLib.csproj", "{98BAE203-C3D5-4EDE-900E-08391391A585}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiRogueLib.Tests", "AsciiRogueLib.Tests\AsciiRogueLib.Tests.csproj", "{CCECE459-AD67-4278-9FCE-8DA4CBAFB310}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiRogue", "AsciiRogue\AsciiRogue.csproj", "{2E591FE4-EB5E-493D-86D3-E5FE8F58597E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsciiRogueLib.Tests", "AsciiRogueLib.Tests\AsciiRogueLib.Tests.csproj", "{CCECE459-AD67-4278-9FCE-8DA4CBAFB310}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

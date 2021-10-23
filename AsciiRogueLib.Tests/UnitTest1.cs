@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace AsciiRogueLib.Tests
+namespace AsciiRogue.Tests
 {
     public class UnitTest1
     {
