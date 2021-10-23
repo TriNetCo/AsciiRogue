@@ -7,14 +7,11 @@ namespace AsciiRogueCli
     {
         static void Main(string[] args)
         {
-            GameMap map = new GameMap(); 
-            map.printMap();
-
             Game game = new Game();
             Character character = game.character;
 
             while (true) {
-                map.printMap();
+                game.printMap();
 
                 ConsoleKeyInfo input;
                 try 

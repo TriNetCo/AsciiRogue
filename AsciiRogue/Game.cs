@@ -11,5 +11,9 @@ namespace AsciiRogue
             this.map = new GameMap();
             this.character = new Character(map);
         }
+
+        public string printMap() {
+            return map.printMap();
+        }
     }
 }

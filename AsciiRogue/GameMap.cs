@@ -11,9 +11,11 @@ namespace AsciiRogue
             lines = File.ReadAllLines("./game_maps/level1.txt");
         }
 
-        public void printMap() 
+        public string printMap() 
         {
-            Console.WriteLine(String.Join("\n", lines));
+            string flatMap = String.Join("\n", lines);
+            Console.WriteLine(flatMap);
+            return flatMap;
         }
 
         public bool Traversable(Vector2Int position){
@@ -27,7 +29,7 @@ namespace AsciiRogue
             lines[origin.y] = lines[origin.y].Remove(origin.x, 1);
 
             // Place character at destination
-            lines[origin.y] = lines[origin.y].Insert(origin.x, mapEntity.ToString());
+            lines[destination.y] = lines[destination.y].Insert(destination.x, mapEntity.ToString());
         }
 
         public Vector2Int GetCharacterPosition(Char mapEntity) 
