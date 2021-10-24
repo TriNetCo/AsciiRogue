@@ -1,3 +1,6 @@
+using System.Runtime;
+using System;
+
 namespace AsciiRogue
 {
     public class Character
@@ -35,6 +38,14 @@ namespace AsciiRogue
                 return true;
             }       
             return false;
+        }
+
+        public string ShowInventory() {
+            throw new NotImplementedException();
+        }
+
+        public bool GiveItem(string itemName) {
+            throw new NotImplementedException();
         }
 
     }
