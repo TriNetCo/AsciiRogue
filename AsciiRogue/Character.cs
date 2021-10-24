@@ -16,9 +16,14 @@ namespace AsciiRogue
         public bool MoveRight() { 
             return moveByVector(new Vector2Int(1 , 0)); 
         }
-        
-        public bool MoveUp() { return false; }
-        public bool MoveDown() { return false; }
+
+        public bool MoveUp() { 
+            return moveByVector(new Vector2Int(0 , -1));
+        }
+
+        public bool MoveDown() { 
+            return moveByVector(new Vector2Int(0 , 1)); 
+        }
         
         private bool moveByVector(Vector2Int vector) {
             Vector2Int pos = map.GetCharacterPosition('@');

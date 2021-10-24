@@ -12,6 +12,10 @@ namespace AsciiRogue
             lines = readMapFromResources("level1");
         }
 
+        public GameMap(string map) {
+            lines = map.Split("\n");
+        }
+
         public string printMap() 
         {
             string flatMap = String.Join("\n", lines);
