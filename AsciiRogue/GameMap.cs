@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections;
 
 namespace AsciiRogue
 {
@@ -7,8 +8,8 @@ namespace AsciiRogue
     {
         private string[] lines;
 
-        public GameMap(){
-            lines = File.ReadAllLines("./game_maps/level1.txt");
+        public GameMap() {
+            lines = readMapFromResources("level1");
         }
 
         public string printMap() 
@@ -47,6 +48,27 @@ namespace AsciiRogue
             }
 
             return null; // character not on map!
+        }
+
+        public string[] readMapFromResources(string mapLevel) {
+            var assembly = typeof(AsciiRogue.GameMap).Assembly;
+            Stream resource = assembly.GetManifestResourceStream("AsciiRogue.assets.game_maps." + mapLevel + ".txt");
+            ArrayList lineList = new ArrayList();
+
+            using (StreamReader reader = new StreamReader(resource))
+            {
+                while(!reader.EndOfStream)
+                {
+                    lineList.Add(reader.ReadLine());
+                }
+            }
+
+            string[] fileLines = new string[lineList.Count];
+            for (int i = 0; i < lineList.Count; i++) {
+                fileLines[i] = (string) lineList[i];
+            }
+
+            return fileLines;
         }
     }
 }

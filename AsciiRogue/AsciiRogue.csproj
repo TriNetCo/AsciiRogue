@@ -2,6 +2,9 @@
 
   <ItemGroup>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="assets\game_maps\*.txt" />
+  </ItemGroup>
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>

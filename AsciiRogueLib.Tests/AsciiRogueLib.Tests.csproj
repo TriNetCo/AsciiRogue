@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AsciiRogueLib\AsciiRogueLib.csproj" />
+    <ProjectReference Include="..\AsciiRogue\AsciiRogue.csproj" />
   </ItemGroup>
 
 </Project>
