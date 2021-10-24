@@ -11,16 +11,18 @@ namespace AsciiRogueCli
             Character character = game.character;
 
             while (true) {
-                game.printMap();
+                string flatMap = game.printMap();
+                Console.Clear();
+                Console.WriteLine(flatMap);
 
                 ConsoleKeyInfo input;
                 try 
                 {
                     input = Console.ReadKey();
-                } 
+                }
                 catch(System.InvalidOperationException) 
                 {
-                    Console.WriteLine("Something went wrong reading the CLI");    
+                    Console.WriteLine("Something went wrong reading the CLI");
                     continue;
                 }
 
@@ -44,9 +46,6 @@ namespace AsciiRogueCli
                         return;
                 }
             }
-
-
-
 
         }
     }

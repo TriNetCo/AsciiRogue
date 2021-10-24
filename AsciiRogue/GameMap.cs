@@ -15,8 +15,6 @@ namespace AsciiRogue
         public string printMap() 
         {
             string flatMap = String.Join("\n", lines);
-            Console.Clear();
-            Console.WriteLine(flatMap);
             return flatMap;
         }
 
