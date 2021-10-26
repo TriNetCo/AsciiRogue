@@ -73,6 +73,8 @@ namespace AsciiRogue.Tests
 
             string map = game.printMap();
 
+            Console.WriteLine(map);
+
             // assertions
             Assert.Equal(expectedOutcomeMap, map);
         }
@@ -98,7 +100,8 @@ namespace AsciiRogue.Tests
             game.character.MoveUp();
 
             string map = game.printMap();
-
+            Console.WriteLine(map);
+            
             // assertions
             Assert.Equal(expectedOutcomeMap, map);
         }
@@ -124,6 +127,8 @@ namespace AsciiRogue.Tests
             game.character.MoveDown();
 
             string map = game.printMap();
+
+            Console.WriteLine(map);
 
             // assertions
             Assert.Equal(expectedOutcomeMap, map);

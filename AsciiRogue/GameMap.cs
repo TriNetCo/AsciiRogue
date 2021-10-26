@@ -16,7 +16,7 @@ namespace AsciiRogue
             lines = map.Split("\n");
         }
 
-        public string printMap() 
+        public string printMap()
         {
             string flatMap = String.Join("\n", lines);
             return flatMap;
@@ -27,23 +27,44 @@ namespace AsciiRogue
         }
 
         public void MoveMapEntity(Vector2Int origin, Vector2Int destination){
-            Char mapEntity = lines[origin.y][origin.x];
-            
-            // Replace origin character with space
+            Char originMapEntity = lines[origin.y][origin.x];
+
+            // map[x, y] = " ";
+
+
+            // if we're leaving our current row, 
+            //   add a " " to the row we're leaving
+            //   remove a " " from the row we're entering
+            // else
+            //   remove our origin character
+            //   place our origin character
+
+            // Remove character at origin space
             lines[origin.y] = lines[origin.y].Remove(origin.x, 1);
 
+            if (isLeavingCurrentRow(origin, destination)) {
+                //   remove a " " from the row we're entering
+                lines[destination.y] = lines[destination.y].Remove(destination.x, 1);
+                //   add a " " to the row we're leaving
+                lines[origin.y] = lines[origin.y].Insert(origin.x, " ");
+            }
+
             // Place character at destination
-            lines[destination.y] = lines[destination.y].Insert(destination.x, mapEntity.ToString());
+            lines[destination.y] = lines[destination.y].Insert(destination.x, originMapEntity.ToString());
         }
 
-        public Vector2Int GetCharacterPosition(Char mapEntity) 
+        public bool isLeavingCurrentRow(Vector2Int origin, Vector2Int destination) {
+            return (origin.y != destination.y);
+        }
+
+        public Vector2Int GetCharacterPosition(Char mapEntity)
         {
-            for (int i = 0; i < lines[0].Length; i++) 
+            for (int i = 0; i < lines[0].Length; i++)
             {
                 string line = lines[i];
                 int x = line.IndexOf(mapEntity);
 
-                if (x == -1) 
+                if (x == -1)
                     continue; // continue searching
 
                 return new Vector2Int(x, i);
@@ -72,5 +93,22 @@ namespace AsciiRogue
 
             return fileLines;
         }
+
+        public string this[int x, int y]
+        {
+            //called when we ask for something = mySession["value"]
+            get
+            {
+                return lines[y][x].ToString();
+            }
+
+            //called when we assign mySession["value"] = something
+            set
+            {
+                //lines[y][x] = value;
+                // MySetData(key, value);
+            }
+        }
+
     }
 }
