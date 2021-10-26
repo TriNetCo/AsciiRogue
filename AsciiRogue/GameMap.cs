@@ -25,19 +25,11 @@ namespace AsciiRogue
         public bool Traversable(Vector2Int position){
             return true;
         }
-
+        
+        /// <summary>Moves the Map Entity at origin to the destination
+        /// </summary>
         public void MoveMapEntity(Vector2Int origin, Vector2Int destination){
             Char originMapEntity = lines[origin.y][origin.x];
-
-            // map[x, y] = " ";
-
-
-            // if we're leaving our current row, 
-            //   add a " " to the row we're leaving
-            //   remove a " " from the row we're entering
-            // else
-            //   remove our origin character
-            //   place our origin character
 
             // Remove character at origin space
             lines[origin.y] = lines[origin.y].Remove(origin.x, 1);
@@ -51,6 +43,10 @@ namespace AsciiRogue
 
             // Place character at destination
             lines[destination.y] = lines[destination.y].Insert(destination.x, originMapEntity.ToString());
+
+            // Force our origin space to become a " " symbol
+            lines[origin.y] = lines[origin.y].Remove(origin.x, 1);
+            lines[origin.y] = lines[origin.y].Insert(origin.x, " ");
         }
 
         public bool isLeavingCurrentRow(Vector2Int origin, Vector2Int destination) {
