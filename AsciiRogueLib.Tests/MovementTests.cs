@@ -101,7 +101,7 @@ namespace AsciiRogue.Tests
 
             string map = game.printMap();
             Console.WriteLine(map);
-            
+
             // assertions
             Assert.Equal(expectedOutcomeMap, map);
         }
@@ -127,6 +127,33 @@ namespace AsciiRogue.Tests
             game.character.MoveDown();
 
             string map = game.printMap();
+
+            Console.WriteLine(map);
+
+            // assertions
+            Assert.Equal(expectedOutcomeMap, map);
+        }
+
+        [Fact]
+        public void the_character_cannot_move_through_an_obstacle()
+        {
+            // setup
+            string startingMap =
+                    @"xxxxx
+                      x @ x
+                      xxxxx".TrimIndentation();
+
+            string expectedOutcomeMap =
+                    @"xxxxx
+                      x @ x
+                      xxxxx".TrimIndentation();
+
+            Game g = new Game(startingMap);
+
+            // excersise code
+            g.character.MoveUp();
+
+            string map = g.printMap();
 
             Console.WriteLine(map);
 
