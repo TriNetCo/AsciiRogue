@@ -21,15 +21,15 @@ namespace AsciiRogue.Tests
             // setup
             string expectedInventory = 
                     @"IIIIIIIIIIIIIIIIII
-                    I   INVENTORY    I
-                    IIIIIIIIIIIIIIIIII
-                    I                I
-                    I                I
-                    I                I
-                    I                I
-                    I                I
-                    I                I
-                    IIIIIIIIIIIIIIIIII".TrimIndentation();
+                      I   INVENTORY    I
+                      IIIIIIIIIIIIIIIIII
+                      I                I
+                      I                I
+                      I                I
+                      I                I
+                      I                I
+                      I                I
+                      IIIIIIIIIIIIIIIIII".TrimIndentation();
 
             // excersise code
             string actualInventory = game.character.ShowInventory();
@@ -44,15 +44,15 @@ namespace AsciiRogue.Tests
             // setup
             string expectedInventory = 
                     @"IIIIIIIIIIIIIIIIII
-                    I   INVENTORY    I
-                    IIIIIIIIIIIIIIIIII
-                    I                I
-                    I - Sword        I
-                    I                I
-                    I                I
-                    I                I
-                    I                I
-                    IIIIIIIIIIIIIIIIII".TrimIndentation();
+                      I   INVENTORY    I
+                      IIIIIIIIIIIIIIIIII
+                      I                I
+                      I - Sword        I
+                      I                I
+                      I                I
+                      I                I
+                      I                I
+                      IIIIIIIIIIIIIIIIII".TrimIndentation();
 
             // excersise code
             game.character.GiveItem("sword");
