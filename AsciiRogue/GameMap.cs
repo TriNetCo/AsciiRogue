@@ -22,6 +22,17 @@ namespace AsciiRogue
             return flatMap;
         }
 
+        public override string ToString()
+        {
+            return String.Join("\n", lines);
+        }
+
+        public void WriteSymbolToPoint(string symbol, Vector2Int point) 
+        {
+            lines[point.y] = lines[point.y].Remove(point.x, 1);
+            lines[point.y] = lines[point.y].Insert(point.x, symbol);
+        }
+
         public bool Traversable(Vector2Int position) {
             string mapEntity = getCharacterAtPoint(position);
             if (mapEntity == " ")
@@ -31,33 +42,15 @@ namespace AsciiRogue
         
         /// <summary>Moves the Map Entity at origin to the destination
         /// </summary>
-        public void MoveMapEntity(Vector2Int origin, Vector2Int destination){
+        public void MoveMapEntity(Vector2Int origin, Vector2Int destination)
+        {
             string originMapEntity = getCharacterAtPoint(origin);
-
-            if (isLeavingCurrentRow(origin, destination)) {
-                //   remove a " " from the row we're entering 
-                lines[destination.y] = lines[destination.y].Remove(destination.x, 1);
-                //   add a " " to the row we're leaving
-                lines[origin.y] = lines[origin.y].Insert(origin.x, " ");
-            }
-
-            // Remove character at origin space
-            lines[origin.y] = lines[origin.y].Remove(origin.x, 1);
-
-            // Place character at destination
-            lines[destination.y] = lines[destination.y].Insert(destination.x, originMapEntity);
-
-            // Force our origin space to become a " " symbol
-            overwriteCharacterAtPoint(origin, " ");
+            WriteSymbolToPoint(originMapEntity, destination);
+            WriteSymbolToPoint(" ", origin);
         }
 
         public string getCharacterAtPoint(Vector2Int point) {
             return lines[point.y][point.x].ToString();
-        }
-
-        public void overwriteCharacterAtPoint(Vector2Int point, string character) {
-            lines[point.y] = lines[point.y].Remove(point.x, 1);
-            lines[point.y] = lines[point.y].Insert(point.x, character);
         }
 
         public bool isLeavingCurrentRow(Vector2Int origin, Vector2Int destination) {
@@ -112,8 +105,8 @@ namespace AsciiRogue
             //called when we assign mySession["value"] = something
             set
             {
-                //lines[y][x] = value;
-                // MySetData(key, value);
+                Vector2Int point = new Vector2Int(x, y);
+                WriteSymbolToPoint(value, point);
             }
         }
 
