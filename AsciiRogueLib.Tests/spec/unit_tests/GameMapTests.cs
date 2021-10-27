@@ -11,47 +11,59 @@ namespace AsciiRogue.Tests
     
         public GameMapTests()
         {
-            startingMap =
-                  @"xxxxxxxxxx
-                    x        x
-                    x x#xxxx x
-                    x x8xxxx x
-                    x x x xx x
-                    x S@     x
-                    x xxx    x
-                    x xxxx   x
-                    x        x
-                    xxxxxxxxxx".TrimIndentation();
-    
-            game = new Game(startingMap);
         }
     
         [Fact]
-        public void we_have_a_good_syntax_for_writing_to_the_map()
+        public void we_have_an_ok_syntax_for_writing_to_the_map()
         {
             // setup
             string startingMap =
                 @"xxxxx
-                  x   x
                   x @ x
-                  x   x
                   xxxxx".TrimIndentation();
     
             string expectedOutcomeMap =
                 @"xxxxx
                   x @ x
-                  x   x
-                  x   x
-                  xxxxx".TrimIndentation();
-    
-    
+                  gxxxx".TrimIndentation();
+
+            GameMap g = new GameMap(startingMap);
+            Vector2Int point = new Vector2Int(0,0);
+
             // excersise code
-            Game g = new Game(startingMap);
+            g.WriteSymbolToPoint("g", point);
     
-            string map = g.printMap();
+            string map = g.ToString();
     
             // assertions
             Assert.Equal<object>(expectedOutcomeMap, map);
         }
+
+        [Fact]
+        public void we_have_a_great_syntax_for_writing_to_the_map()
+        {
+            // setup
+            string startingMap =
+                @"xxxxx
+                  x @ x
+                  xxxxx".TrimIndentation();
+    
+            string expectedOutcomeMap =
+                @"xxxxx
+                  x @ x
+                  gxxxx".TrimIndentation();
+
+            GameMap g = new GameMap(startingMap);
+
+            // excersise code
+            g[0,0] = "g";
+            string map = g.ToString();
+
+            Console.WriteLine(map);
+    
+            // assertions
+            Assert.Equal<object>(expectedOutcomeMap, map);
+        }
+
     }
 }
