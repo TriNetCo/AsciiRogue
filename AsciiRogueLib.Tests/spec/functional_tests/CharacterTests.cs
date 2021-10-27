@@ -4,13 +4,12 @@ using TestExtensions;
 
 namespace AsciiRogue.Tests
 {
-    public class MovementTests
+    public class FunctionalCharacterTests
     {
-
         private string startingMap;
         private Game game;
 
-        public MovementTests()
+        public FunctionalCharacterTests()
         {
             startingMap = 
                     @"xxxxxxxxxx
@@ -160,6 +159,58 @@ namespace AsciiRogue.Tests
             // assertions
             Assert.Equal(expectedOutcomeMap, map);
         }
+
+
+        [Fact]
+    public void when_the_character_touches_a_switch_the_gate_is_removed_and_the_switch_downcases()
+    {
+        // setup
+        string expectedOutcomeMap =
+              @"xxxxxxxxxx
+                x        x
+                x x xxxx x
+                x x8xxxx x
+                x x x xx x
+                x s@     x
+                x xxx    x
+                x xxxx   x
+                x        x
+                xxxxxxxxxx".TrimIndentation();
+
+        // excersise code
+        game.character.MoveLeft();
+
+        string map = game.printMap();
+
+        // assertions
+        Assert.Equal<object>(expectedOutcomeMap, map);
+    }
+
+    [Fact]
+    public void when_the_character_travles_to_stairs_the_next_level_loads()
+    {
+        // setup
+        string expectedOutcomeMap =
+              @"xxxxxxxxxx
+                x        x
+                x x xxxx x
+                x x8xxxx x
+                x x x xx x
+                x s@     x
+                x xxx    x
+                x xxxx   x
+                x        x
+                xxxxxxxxxx".TrimIndentation();
+
+        // excersise code
+        game.character.MoveUp();
+        game.character.MoveUp();
+
+        string map = game.printMap();
+
+        // assertions
+        Assert.Equal<object>(expectedOutcomeMap, map);
+    }
         
     }
 }
