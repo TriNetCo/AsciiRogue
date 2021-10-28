@@ -2,24 +2,24 @@ namespace AsciiRogue
 {
     public class Game
     {
-        public Character character;
-         
+        public Character Character;
+
         private GameMap map;
 
         public Game() 
         {
-            this.map = new GameMap();
-            this.character = new Character(map);
+            map = new GameMap();
+            Character = map.Character;
         }
 
         public Game(string mapString) 
         {
-            this.map =  new GameMap(mapString);
-            this.character = new Character(map);
+            map =  new GameMap(mapString);
+            Character = map.Character;
         }
 
         public string printMap() {
-            return map.printMap();
+            return map.ToString();
         }
     }
 }

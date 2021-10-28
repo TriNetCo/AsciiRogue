@@ -1,5 +1,7 @@
 ﻿using System;
 using AsciiRogue;
+using AsciiRogue.menu;
+using AsciiRogue.inputHandlers;
 
 namespace AsciiRogueCli
 {
@@ -7,46 +9,50 @@ namespace AsciiRogueCli
     {
         static void Main(string[] args)
         {
-            Game game = new Game();
-            Character character = game.character;
 
-            while (true) {
-                string flatMap = game.printMap();
-                Console.Clear();
-                Console.WriteLine(flatMap);
+            startTheStartScreen();
 
-                ConsoleKeyInfo input;
-                try 
-                {
-                    input = Console.ReadKey();
-                }
-                catch(System.InvalidOperationException) 
-                {
-                    Console.WriteLine("Something went wrong reading the CLI");
-                    continue;
-                }
-
-                switch(input.Key) {
-                    case ConsoleKey.LeftArrow:
-                        character.MoveLeft();
-                        break;
-                    case ConsoleKey.RightArrow:
-                        character.MoveRight();
-                        break;
-                    case ConsoleKey.UpArrow:
-                        character.MoveUp();
-                        break;
-                    case ConsoleKey.DownArrow:
-                        character.MoveDown();
-                        break;
-                    
-                    case ConsoleKey.Q:
-                        return;
-                    case ConsoleKey.I:
-                        return;
-                }
-            }
+            // startSinglePlayerGame();
 
         }
+
+
+        static void startTheStartScreen()
+        {
+            StartScreen startScreen = new StartScreen();
+            StartScreenInputHandler startScreenInputHandler = new StartScreenInputHandler(startScreen);
+            
+            while (true) 
+            {
+                string command = startScreenInputHandler.Control();
+
+                if (command == "new_game")
+                    startSinglePlayerGame();
+                if (command == "multiplayer")
+                    startMultiplayerMenu();
+                if (command == "q") return;
+                
+            }
+        }
+
+        static void startMultiplayerMenu()
+        {
+            return;
+        }
+
+
+        static void startSinglePlayerGame()
+        {
+            Game game = new Game();
+            GameInputHandler gameInputHandler = new GameInputHandler(game);
+            
+            while (true) 
+            {
+                string command = gameInputHandler.Control();
+
+                if (command == "q") return;
+            }
+        }
+
     }
 }
