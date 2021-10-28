@@ -43,7 +43,7 @@ namespace AsciiRogue.Tests
                       xxxxxxxxxx".TrimIndentation();
 
             // excersise code
-            game.character.MoveLeft();
+            game.Character.MoveLeft();
 
             string map = game.printMap();
 
@@ -68,7 +68,7 @@ namespace AsciiRogue.Tests
                       xxxxxxxxxx".TrimIndentation();
 
             // excersise code
-            game.character.MoveRight();
+            game.Character.MoveRight();
 
             string map = game.printMap();
 
@@ -96,7 +96,7 @@ namespace AsciiRogue.Tests
                       xxxxxxxxxx".TrimIndentation();
 
             // excersise code
-            game.character.MoveUp();
+            game.Character.MoveUp();
 
             string map = game.printMap();
             Console.WriteLine(map);
@@ -123,7 +123,7 @@ namespace AsciiRogue.Tests
                       xxxxxxxxxx".TrimIndentation();
 
             // excersise code
-            game.character.MoveDown();
+            game.Character.MoveDown();
 
             string map = game.printMap();
 
@@ -150,7 +150,7 @@ namespace AsciiRogue.Tests
             Game g = new Game(startingMap);
 
             // excersise code
-            g.character.MoveUp();
+            g.Character.MoveUp();
 
             string map = g.printMap();
 
@@ -178,7 +178,7 @@ namespace AsciiRogue.Tests
                 xxxxxxxxxx".TrimIndentation();
 
         // excersise code
-        game.character.MoveLeft();
+        game.Character.MoveLeft();
 
         string map = game.printMap();
 
@@ -203,8 +203,8 @@ namespace AsciiRogue.Tests
                 xxxxxxxxxx".TrimIndentation();
 
         // excersise code
-        game.character.MoveUp();
-        game.character.MoveUp();
+        game.Character.MoveUp();
+        game.Character.MoveUp();
 
         string map = game.printMap();
 

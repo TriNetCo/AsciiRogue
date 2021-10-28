@@ -5,40 +5,38 @@ namespace AsciiRogue
 {
     public class Character
     {
-        private GameMap map;
+        public string symbol;
+        private ConsoleMap map;
+        private char[] traversableSymbols;
 
-        public Character(GameMap map) {
+        public Character(ConsoleMap map) {
             this.map = map;
+            symbol = "@";
+            this.traversableSymbols = new char[] { ' ' };
         }
 
-        public bool MoveLeft()
-        {
-            return moveByVector(new Vector2Int(-1 , 0));
+        public Character(ConsoleMap map, string symbol, char[] traversableSymbols) {
+            this.map = map;
+            this.symbol = symbol;
+            this.traversableSymbols = traversableSymbols;
+        }
+
+        public bool MoveLeft() {
+            return map.MoveByVector(new Vector2Int(-1 , 0), traversableSymbols, symbol);
         }
 
         public bool MoveRight() { 
-            return moveByVector(new Vector2Int(1 , 0)); 
+            return map.MoveByVector(new Vector2Int(1 , 0), traversableSymbols, symbol); 
         }
 
         public bool MoveUp() { 
-            return moveByVector(new Vector2Int(0 , -1));
+            return map.MoveByVector(new Vector2Int(0 , -1), traversableSymbols, symbol);
         }
 
         public bool MoveDown() { 
-            return moveByVector(new Vector2Int(0 , 1)); 
+            return map.MoveByVector(new Vector2Int(0 , 1), traversableSymbols, symbol); 
         }
         
-        private bool moveByVector(Vector2Int vector) {
-            Vector2Int pos = map.GetCharacterPosition('@');
-            Vector2Int desiredPosition = pos + vector;
-
-            if (map.Traversable(desiredPosition)) 
-            {
-                map.MoveMapEntity(pos, desiredPosition);
-                return true;
-            }       
-            return false;
-        }
 
         public string ShowInventory() {
             throw new NotImplementedException();

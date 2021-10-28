@@ -32,7 +32,7 @@ namespace AsciiRogue.Tests
                       IIIIIIIIIIIIIIIIII".TrimIndentation();
 
             // excersise code
-            string actualInventory = game.character.ShowInventory();
+            string actualInventory = game.Character.ShowInventory();
 
             // assertions
             Assert.Equal<object>(expectedInventory, actualInventory);
@@ -55,8 +55,8 @@ namespace AsciiRogue.Tests
                       IIIIIIIIIIIIIIIIII".TrimIndentation();
 
             // excersise code
-            game.character.GiveItem("sword");
-            string actualInventory = game.character.ShowInventory();
+            game.Character.GiveItem("sword");
+            string actualInventory = game.Character.ShowInventory();
 
             // assertions
             Assert.Equal<object>(expectedInventory, actualInventory);
