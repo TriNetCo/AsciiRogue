@@ -8,3 +8,22 @@ There might be a health bar.
 
 
 Ref: https://docs.microsoft.com/en-us/dotnet/core/testing/unit-testing-with-dotnet-test
+
+
+## TODO
+
+Quinn says it would be really cool to have a level with 8 doors, and you pick a door, and you have to fit the boss of that room.  Once you defeat 3 rooms, you can move on.  BUT if you defeat like 5 of them, another door would unlock with a chest in it!
+
+            #########
+          ######8######
+        ##             ##
+      ##                 ##
+    ##                     ##
+  ###                       ###
+  ##8                       8##
+  ###                       ###
+    ##                     ##
+      ##                 ##
+        ##             ##
+          ######8######
+            #########
