@@ -1,0 +1,10 @@
+#########################
+#       Join Game       #
+#########################
+#                       #
+#  * Join Game          #
+#  - Host Private Game  #
+#  - Host Public Game   #
+#  - List Public Games  #
+#                       #
+#########################

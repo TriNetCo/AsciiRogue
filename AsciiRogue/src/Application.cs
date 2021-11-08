@@ -2,6 +2,7 @@
 using AsciiRogue;
 using AsciiRogue.menu;
 using AsciiRogue.inputHandlers;
+using System.Collections.Generic;
 
 namespace AsciiRogueCli
 {
@@ -37,7 +38,28 @@ namespace AsciiRogueCli
 
         static void startMultiplayerMenu()
         {
-            return;
+            Dictionary<string, string> config = new Dictionary<string, string>();
+            config["mapName"] = "multiplayer_screen";
+            StartScreen startScreen = new StartScreen(config);
+            StartScreenInputHandler startScreenInputHandler = new StartScreenInputHandler(startScreen);
+            
+            while (true)
+            {
+                string command = startScreenInputHandler.Control();
+
+                if (command == "join_game")
+                    startJoinGameMenu();
+                if (command == "host_private_game")
+                    startHostedMultiplayerGame();
+                if (command == "q") return;
+                
+            }
+        }
+
+
+
+        static void startJoinGameMenu() {
+
         }
 
 
@@ -46,6 +68,20 @@ namespace AsciiRogueCli
             Game game = new Game();
             GameInputHandler gameInputHandler = new GameInputHandler(game);
             
+            while (true) 
+            {
+                string command = gameInputHandler.Control();
+
+                if (command == "q") return;
+            }
+        }
+
+        static void startHostedMultiplayerGame()
+        {
+            Game game = new Game();
+            NetworkHandler networkHandler = new NetworkHandler(game);
+            GameInputHandler gameInputHandler = new GameInputHandler(game);
+
             while (true) 
             {
                 string command = gameInputHandler.Control();
