@@ -57,7 +57,7 @@ namespace AsciiRogue
             return lines[point.y][point.x].ToString();
         }
 
-        public Vector2Int GetCharacterPosition(Char mapEntity)
+        public Vector2Int GetCharacterPosition(char mapEntity)
         {
             for (int i = 0; i < lines[0].Length; i++)
             {
@@ -78,6 +78,7 @@ namespace AsciiRogue
             //called when we ask for something = mySession["value"]
             get
             {
+                int actualX = lines.Length - x;
                 return lines[y][x].ToString();
             }
 
