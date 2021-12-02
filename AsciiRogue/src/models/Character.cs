@@ -30,11 +30,11 @@ namespace AsciiRogue
         }
 
         public bool MoveUp() { 
-            return map.MoveByVector(new Vector2Int(0 , -1), traversableSymbols, symbol);
+            return map.MoveByVector(new Vector2Int(0 , 1), traversableSymbols, symbol);
         }
 
         public bool MoveDown() { 
-            return map.MoveByVector(new Vector2Int(0 , 1), traversableSymbols, symbol); 
+            return map.MoveByVector(new Vector2Int(0 , -1), traversableSymbols, symbol); 
         }
         
 

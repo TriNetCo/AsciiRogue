@@ -18,8 +18,10 @@ namespace AsciiRogue
 
         public void WriteSymbolToPoint(string symbol, Vector2Int point) 
         {
-            lines[point.y] = lines[point.y].Remove(point.x, 1);
-            lines[point.y] = lines[point.y].Insert(point.x, symbol);
+            int y = getActualY(point.y);
+
+            lines[y] = lines[y].Remove(point.x, 1);
+            lines[y] = lines[y].Insert(point.x, symbol);
         }
 
         public bool Traversable(Vector2Int position, char[] traversableSymbols) {
@@ -54,7 +56,7 @@ namespace AsciiRogue
         }
 
         public string getCharacterAtPoint(Vector2Int point) {
-            return lines[point.y][point.x].ToString();
+            return lines[getActualY(point.y)][point.x].ToString();
         }
 
         public Vector2Int GetCharacterPosition(char mapEntity)
@@ -67,7 +69,7 @@ namespace AsciiRogue
                 if (x == -1)
                     continue; // continue searching
 
-                return new Vector2Int(x, i);
+                return new Vector2Int(x, getActualY(i));
             }
 
             return null; // character not on map!
@@ -78,8 +80,7 @@ namespace AsciiRogue
             //called when we ask for something = mySession["value"]
             get
             {
-                int actualX = lines.Length - x;
-                return lines[y][x].ToString();
+                return lines[getActualY(y)][x].ToString();
             }
 
             //called when we assign mySession["value"] = something
@@ -88,6 +89,12 @@ namespace AsciiRogue
                 Vector2Int point = new Vector2Int(x, y);
                 WriteSymbolToPoint(value, point);
             }
+        }
+
+        /// <summary>Translate the mathy x,y format into the raster-based format
+        /// </summary>
+        private int getActualY(int y) {
+            return lines.Length - 1 - y;
         }
 
     }
