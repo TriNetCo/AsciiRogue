@@ -160,57 +160,56 @@ namespace AsciiRogue.Tests
             Assert.Equal(expectedOutcomeMap, map);
         }
 
+        [Fact]
+        public void when_the_character_touches_a_switch_the_gate_is_removed_and_the_switch_downcases()
+        {
+            // setup
+            string expectedOutcomeMap =
+                  @"xxxxxxxxxx
+                    x        x
+                    x x xxxx x
+                    x x8xxxx x
+                    x x x xx x
+                    x s@     x
+                    x xxx    x
+                    x xxxx   x
+                    x        x
+                    xxxxxxxxxx".TrimIndentation();
+
+            // excersise code
+            game.Character.MoveLeft();
+
+            string map = game.printMap();
+
+            // assertions
+            Assert.Equal<object>(expectedOutcomeMap, map);
+        }
 
         [Fact]
-    public void when_the_character_touches_a_switch_the_gate_is_removed_and_the_switch_downcases()
-    {
-        // setup
-        string expectedOutcomeMap =
-              @"xxxxxxxxxx
-                x        x
-                x x xxxx x
-                x x8xxxx x
-                x x x xx x
-                x s@     x
-                x xxx    x
-                x xxxx   x
-                x        x
-                xxxxxxxxxx".TrimIndentation();
+        public void when_the_character_travles_to_stairs_the_next_level_loads()
+        {
+            // setup
+            string expectedOutcomeMap =
+                  @"xxxxxxxxxx
+                    x        x
+                    x x xxxx x
+                    x x8xxxx x
+                    x x x xx x
+                    x s@     x
+                    x xxx    x
+                    x xxxx   x
+                    x        x
+                    xxxxxxxxxx".TrimIndentation();
 
-        // excersise code
-        game.Character.MoveLeft();
+            // excersise code
+            game.Character.MoveUp();
+            game.Character.MoveUp();
 
-        string map = game.printMap();
+            string map = game.printMap();
 
-        // assertions
-        Assert.Equal<object>(expectedOutcomeMap, map);
-    }
-
-    [Fact]
-    public void when_the_character_travles_to_stairs_the_next_level_loads()
-    {
-        // setup
-        string expectedOutcomeMap =
-              @"xxxxxxxxxx
-                x        x
-                x x xxxx x
-                x x8xxxx x
-                x x x xx x
-                x s@     x
-                x xxx    x
-                x xxxx   x
-                x        x
-                xxxxxxxxxx".TrimIndentation();
-
-        // excersise code
-        game.Character.MoveUp();
-        game.Character.MoveUp();
-
-        string map = game.printMap();
-
-        // assertions
-        Assert.Equal<object>(expectedOutcomeMap, map);
-    }
+            // assertions
+            Assert.Equal<object>(expectedOutcomeMap, map);
+        }
         
     }
 }
