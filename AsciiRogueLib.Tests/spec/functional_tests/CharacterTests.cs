@@ -253,25 +253,37 @@ namespace AsciiRogue.Tests
         public void when_the_character_travles_to_stairs_the_next_level_loads()
         {
             // setup
+            string startingMap =
+                    @"xx8xx
+                      x   x
+                      xs@ x
+                      xxxxx".TrimIndentation();
+
             string expectedOutcomeMap =
-                  @"xxxxxxxxxx
-                    x        x
-                    x x xxxx x
-                    x x8xxxx x
-                    x x x xx x
-                    x s@     x
-                    x xxx    x
-                    x xxxx   x
-                    x        x
-                    xxxxxxxxxx".TrimIndentation();
+                     @"xxxxxxxxxx
+                       x        x
+                       x xxxxxx x
+                       x x@     x
+                       x xxxxx  x
+                       x        x
+                       x     7  x
+                       x        x
+                       x    8   x
+                       xxxxxxxxxx".TrimIndentation();
+                       
+            Game g = new Game(startingMap);
 
             // excersise code
-            game.Character.MoveUp();
-            game.Character.MoveUp();
+            g.Character.MoveUp();
+            g.Character.MoveUp();
 
-            string map = game.printMap();
+            string map = g.printMap();
+            Console.WriteLine(map);
 
             // assertions
+            // Assert.Equal<object>(expectedOutcomeMap, map);
+
+            Assert.Equal("level2", g.map.MapName);
             Assert.Equal<object>(expectedOutcomeMap, map);
         }
         

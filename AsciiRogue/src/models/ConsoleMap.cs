@@ -1,11 +1,14 @@
 using System;
 
+using System.Text.RegularExpressions;
+
 namespace AsciiRogue
 {
     public class ConsoleMap
     {
         protected string[] lines;
         protected string[] shadowLines;
+        public string MapName = "level1";
 
         public void LoadMap(string mapName)
         {
@@ -87,16 +90,13 @@ namespace AsciiRogue
         }
 
         public bool InteractWithObject(Vector2Int movementVector) {
+            Vector2Int characterPos = GetCharacterPosition('@');
+            Vector2Int destinationVector = characterPos + movementVector;
+            String destinationSymbol = this[destinationVector.x, destinationVector.y];
 
             // if the adjacent object is a switch, 
             // flip the switch
             // and delete the gate
-            Vector2Int characterPos = GetCharacterPosition('@');
-
-            Vector2Int destinationVector = characterPos + movementVector;
-
-            String destinationSymbol = this[destinationVector.x, destinationVector.y];
-
             if (destinationSymbol == "s") {
                 this[destinationVector.x, destinationVector.y] = "S";
 
@@ -113,6 +113,13 @@ namespace AsciiRogue
                 Vector2Int gratePosition = GetCharacterPositionShadow(symbol);
                 WriteSymbolToPointShadow(" ", gratePosition);
                 this[gratePosition.x, gratePosition.y] = symbol.ToString();
+            } 
+            
+            else if (destinationSymbol == "8") {
+                int mapIndex = int.Parse(MapName.Replace("level", ""));
+                MapName = "level" + (mapIndex+1);
+
+                LoadMap(MapName);
             }
 
             return false;

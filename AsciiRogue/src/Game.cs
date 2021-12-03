@@ -4,7 +4,7 @@ namespace AsciiRogue
     {
         public Character Character;
 
-        private GameMap map;
+        public GameMap map;
 
         public Game() 
         {
