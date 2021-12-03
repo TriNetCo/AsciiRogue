@@ -5,10 +5,12 @@ namespace AsciiRogue
     public class ConsoleMap
     {
         protected string[] lines;
+        protected string[] shadowLines;
 
         public void LoadMap(string mapName)
         {
             lines = FileUtils.readMapFromResources(mapName);
+            produceShadowLinesClone();
         }
 
         public override string ToString()
@@ -16,12 +18,41 @@ namespace AsciiRogue
             return String.Join("\n", lines);
         }
 
+        public string PrintShadowMap() {
+            return String.Join("\n", shadowLines);
+        }
+
+        protected void produceShadowLinesClone() {
+            shadowLines = new string[lines.Length];
+            lines.CopyTo(shadowLines, 0);
+
+            // remove interactive symbols
+            char[] interactiveSymbols = { '@', 's', 'S', '#' }; 
+            foreach (char symbol in interactiveSymbols) {
+                Vector2Int pos = GetCharacterPositionShadow(symbol);
+                if (pos == null)
+                    continue;
+                WriteSymbolToPointShadow(" ", pos);
+            }
+
+        }
+
         public void WriteSymbolToPoint(string symbol, Vector2Int point) 
+        {
+            WriteSymbolToPoint(symbol, point, lines);
+        }
+
+        public void WriteSymbolToPointShadow(string symbol, Vector2Int point) 
+        {
+            WriteSymbolToPoint(symbol, point, shadowLines);
+        }
+
+        public void WriteSymbolToPoint(string symbol, Vector2Int point, string[] memoryLines) 
         {
             int y = getActualY(point.y);
 
-            lines[y] = lines[y].Remove(point.x, 1);
-            lines[y] = lines[y].Insert(point.x, symbol);
+            memoryLines[y] = memoryLines[y].Remove(point.x, 1);
+            memoryLines[y] = memoryLines[y].Insert(point.x, symbol);
         }
 
         public bool Traversable(Vector2Int position, char[] traversableSymbols) {
@@ -44,14 +75,46 @@ namespace AsciiRogue
         }
 
         public bool MoveByVector(Vector2Int vector, char[] traversableSymbols, string symbolMoving) {
-            Vector2Int pos = GetCharacterPosition(symbolMoving[0]);
-            Vector2Int desiredPosition = pos + vector;
+            Vector2Int characterPos = GetCharacterPosition(symbolMoving[0]);
+            Vector2Int desiredPosition = characterPos + vector;
 
             if (Traversable(desiredPosition, traversableSymbols)) 
             {
-                MoveMapEntity(pos, desiredPosition);
+                MoveMapEntity(characterPos, desiredPosition);
                 return true;
             }       
+            return false;
+        }
+
+        public bool InteractWithObject(Vector2Int movementVector) {
+
+            // if the adjacent object is a switch, 
+            // flip the switch
+            // and delete the gate
+            Vector2Int characterPos = GetCharacterPosition('@');
+
+            Vector2Int destinationVector = characterPos + movementVector;
+
+            String destinationSymbol = this[destinationVector.x, destinationVector.y];
+
+            if (destinationSymbol == "s") {
+                this[destinationVector.x, destinationVector.y] = "S";
+
+                char symbol = '#';
+                // remove all grates from the map
+                Vector2Int gratePosition = GetCharacterPosition(symbol);
+                this[gratePosition.x, gratePosition.y] = " ";
+                WriteSymbolToPointShadow(symbol.ToString(), gratePosition);
+            } else if (destinationSymbol == "S") {
+                this[destinationVector.x, destinationVector.y] = "s";
+
+                char symbol = '#';
+                // remove all grates from the map
+                Vector2Int gratePosition = GetCharacterPositionShadow(symbol);
+                WriteSymbolToPointShadow(" ", gratePosition);
+                this[gratePosition.x, gratePosition.y] = symbol.ToString();
+            }
+
             return false;
         }
 
@@ -59,11 +122,22 @@ namespace AsciiRogue
             return lines[getActualY(point.y)][point.x].ToString();
         }
 
-        public Vector2Int GetCharacterPosition(char mapEntity)
+        public Vector2Int GetCharacterPosition(char mapEntity){
+            return GetCharacterPosition(lines, mapEntity);
+        }
+
+        public Vector2Int GetCharacterPositionShadow(char mapEntity){
+            return GetCharacterPosition(shadowLines, mapEntity);
+        }
+
+        public Vector2Int GetCharacterPosition(string[] mapLines, char mapEntity)
         {
-            for (int i = 0; i < lines[0].Length; i++)
+            // So... I'm thinking this is a bug, I'm not doing anything to iterate along the Y, only X is regarded here, thus
+            // I get an index out of bounds error with non-squar or unfortunately shaped maps...
+
+            for (int i = 0; i < mapLines.Length; i++)
             {
-                string line = lines[i];
+                string line = mapLines[i];
                 int x = line.IndexOf(mapEntity);
 
                 if (x == -1)

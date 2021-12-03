@@ -22,7 +22,13 @@ namespace AsciiRogue
         }
 
         public bool MoveLeft() {
-            return map.MoveByVector(new Vector2Int(-1 , 0), traversableSymbols, symbol);
+            bool moved = map.MoveByVector(new Vector2Int(-1 , 0), traversableSymbols, symbol);
+            if (moved)
+                return moved;
+            
+            map.InteractWithObject(new Vector2Int(-1 , 0));
+
+            return false; // we didn't move, perhaps we interacted but who cares...
         }
 
         public bool MoveRight() { 

@@ -1,7 +1,3 @@
-using System;
-using System.IO;
-using System.Collections;
-
 namespace AsciiRogue
 {
     public class GameMap : ConsoleMap
@@ -11,11 +7,19 @@ namespace AsciiRogue
         public GameMap() {
             this.Character = new Character(this);
             lines = FileUtils.readMapFromResources("level1");
+            produceShadowLinesClone();
         }
 
         public GameMap(string map) {
             this.Character = new Character(this);
             lines = map.Split("\n");
+            produceShadowLinesClone();
+        }
+
+        public GameMap(string map, string shadowMap) {
+            this.Character = new Character(this);
+            lines = map.Split("\n");
+            shadowLines = shadowMap.Split("\n");
         }
 
     }

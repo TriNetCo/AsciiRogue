@@ -65,5 +65,29 @@ namespace AsciiRogue.Tests
             Assert.Equal<object>(expectedOutcomeMap, map);
         }
 
+        [Fact]
+        public void it_has_a_shadowmap_that_initializes_correctly()
+        {
+            // setup
+            string startingMap =
+                @"xxxxx
+                  x#@sx
+                  xxxxx".TrimIndentation();
+    
+            string expectedOutcomeMap =
+                @"xxxxx
+                  x   x
+                  xxxxx".TrimIndentation();
+
+            GameMap g = new GameMap(startingMap);
+
+            string map = g.PrintShadowMap();
+
+            Console.WriteLine(map);
+    
+            // assertions
+            Assert.Equal<object>(expectedOutcomeMap, map);
+        }
+
     }
 }
