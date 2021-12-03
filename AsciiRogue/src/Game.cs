@@ -14,13 +14,13 @@ namespace AsciiRogue
 
         public Game(string mapString) 
         {
-            map =  new GameMap(mapString);
+            map = new GameMap(mapString);
             Character = map.Character;
         }
 
         public Game(string mapString, string shadowMapString) 
         {
-            map =  new GameMap(mapString, shadowMapString);
+            map = new GameMap(mapString, shadowMapString);
             Character = map.Character;
         }
 

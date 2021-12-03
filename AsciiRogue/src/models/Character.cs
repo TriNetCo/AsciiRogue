@@ -21,29 +21,31 @@ namespace AsciiRogue
             this.traversableSymbols = traversableSymbols;
         }
 
-        public bool MoveLeft() {
-            bool moved = map.MoveByVector(new Vector2Int(-1 , 0), traversableSymbols, symbol);
+        public bool MoveByVector(Vector2Int vector) {
+            bool moved = map.MoveByVector(vector, traversableSymbols, symbol);
             if (moved)
                 return moved;
             
-            map.InteractWithObject(new Vector2Int(-1 , 0));
+            map.InteractWithObject(vector);
+            return false; // we didn't move, perhaps we interacted but who really cares...
+        }
 
-            return false; // we didn't move, perhaps we interacted but who cares...
+        public bool MoveLeft() {
+            return MoveByVector(new Vector2Int(-1 , 0));
         }
 
         public bool MoveRight() { 
-            return map.MoveByVector(new Vector2Int(1 , 0), traversableSymbols, symbol); 
+            return MoveByVector(new Vector2Int(1 , 0));
         }
 
         public bool MoveUp() { 
-            return map.MoveByVector(new Vector2Int(0 , 1), traversableSymbols, symbol);
+            return MoveByVector(new Vector2Int(0 , 1));
         }
 
         public bool MoveDown() { 
-            return map.MoveByVector(new Vector2Int(0 , -1), traversableSymbols, symbol); 
+            return MoveByVector(new Vector2Int(0 , -1));
         }
         
-
         public string ShowInventory() {
             throw new NotImplementedException();
         }
