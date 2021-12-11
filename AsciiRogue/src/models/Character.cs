@@ -1,5 +1,5 @@
-using System.Runtime;
 using System;
+using System.Linq;
 
 namespace AsciiRogue
 {
@@ -9,13 +9,17 @@ namespace AsciiRogue
         private ConsoleMap map;
         private char[] traversableSymbols;
 
+        public Inventory inventory;
+
         public Character(ConsoleMap map) {
+            inventory = new Inventory();
             this.map = map;
             symbol = "@";
             this.traversableSymbols = new char[] { ' ' };
         }
 
         public Character(ConsoleMap map, string symbol, char[] traversableSymbols) {
+            inventory = new Inventory();
             this.map = map;
             this.symbol = symbol;
             this.traversableSymbols = traversableSymbols;
@@ -46,12 +50,31 @@ namespace AsciiRogue
             return MoveByVector(new Vector2Int(0 , -1));
         }
         
+        // clear the screen
+        // render the inventory template
+        // render the items in their appropriate slot
         public string ShowInventory() {
-            throw new NotImplementedException();
+           
+            Console.Clear();
+            string[] inventoryLines = FileUtils.readMenuFromResources("inventory_screen");
+            // inventoryLines[3] = "I  - hihihih     I";
+
+            for (int i = 0; i < inventory.inventoryItems.Count; i++) {
+                InventoryItem item = (InventoryItem) inventory.inventoryItems[i];
+
+                inventoryLines[i+3] = "I  - " + item.Name.PadRight(12) + "I";
+            }
+
+            string invLinesJoined = String.Join("\n", inventoryLines);
+            Console.WriteLine(invLinesJoined);
+
+            return invLinesJoined;
         }
 
         public bool GiveItem(string itemName) {
-            throw new NotImplementedException();
+            InventoryItem item = new InventoryItem(itemName);
+            inventory.GiveItem(item);
+            return true;
         }
 
     }

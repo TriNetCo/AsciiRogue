@@ -42,11 +42,14 @@ namespace AsciiRogue.inputHandlers
                     case ConsoleKey.DownArrow:
                         character.MoveDown();
                         break;
+
+                    case ConsoleKey.I:
+                        character.ShowInventory();
+                        ConsoleKeyInfo info = Console.ReadKey();
+                        break;
                     
                     case ConsoleKey.Q:
                         return "q";
-                    case ConsoleKey.I:
-                        return "i";
                     case ConsoleKey.M:
                         return "m";
                 }

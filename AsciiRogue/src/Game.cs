@@ -6,13 +6,13 @@ namespace AsciiRogue
 
         public GameMap map;
 
-        public Game() 
+        public Game()
         {
             map = new GameMap();
             Character = map.Character;
         }
 
-        public Game(string mapString) 
+        public Game(string mapString)
         {
             map = new GameMap(mapString);
             Character = map.Character;

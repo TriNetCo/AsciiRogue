@@ -46,8 +46,8 @@ namespace AsciiRogue.Tests
                     @"IIIIIIIIIIIIIIIIII
                       I   INVENTORY    I
                       IIIIIIIIIIIIIIIIII
+                      I  - Sword       I
                       I                I
-                      I - Sword        I
                       I                I
                       I                I
                       I                I
@@ -55,7 +55,7 @@ namespace AsciiRogue.Tests
                       IIIIIIIIIIIIIIIIII".TrimIndentation();
 
             // excersise code
-            game.Character.GiveItem("sword");
+            game.Character.GiveItem("Sword");
             string actualInventory = game.Character.ShowInventory();
 
             // assertions
