@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/AsciiRogue/bin/Debug/net5.0/AsciiRogue.dll",
+            "program": "${workspaceFolder}/AsciiRogue/bin/Debug/net6.0/AsciiRogue.dll",
             "args": [],
             "cwd": "${workspaceFolder}/AsciiRogue",
             // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
