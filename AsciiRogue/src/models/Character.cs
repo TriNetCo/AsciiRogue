@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace AsciiRogue
 {
@@ -54,21 +53,12 @@ namespace AsciiRogue
         // render the inventory template
         // render the items in their appropriate slot
         public string ShowInventory() {
-           
             Console.Clear();
-            string[] inventoryLines = FileUtils.readMenuFromResources("inventory_screen");
-            // inventoryLines[3] = "I  - hihihih     I";
 
-            for (int i = 0; i < inventory.inventoryItems.Count; i++) {
-                InventoryItem item = (InventoryItem) inventory.inventoryItems[i];
+            string inventoryResult = inventory.ToString();
+            Console.WriteLine(inventoryResult);
 
-                inventoryLines[i+3] = "I  - " + item.Name.PadRight(12) + "I";
-            }
-
-            string invLinesJoined = String.Join("\n", inventoryLines);
-            Console.WriteLine(invLinesJoined);
-
-            return invLinesJoined;
+            return inventoryResult;
         }
 
         public bool GiveItem(string itemName) {
