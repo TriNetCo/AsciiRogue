@@ -1,5 +1,4 @@
-﻿using System;
-using AsciiRogue;
+﻿using AsciiRogue;
 using AsciiRogue.menu;
 using AsciiRogue.inputHandlers;
 using System.Collections.Generic;
