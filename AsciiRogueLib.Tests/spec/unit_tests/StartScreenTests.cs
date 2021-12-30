@@ -71,6 +71,29 @@ namespace AsciiRogue.Tests
             Assert.Equal<object>(expectedScreen, startScreen.ToString());
         }
 
+        [Fact]
+        public void we_dont_get_an_index_out_of_bounds_error_when_we_move_below_the_last_button()
+        {
+            // setup
+            string expectedScreen = 
+                    @"#######################
+                      #     Ascii Rogue     #
+                      #######################
+                      #                     #
+                      #    - New Game       #
+                      #    - Continue       #
+                      #    * Multiplayer    #
+                      #                     #
+                      #######################".TrimIndentation();
+
+            startScreen.Character.MoveDown();
+            startScreen.Character.MoveDown();
+            startScreen.Character.MoveDown();
+
+
+            Assert.Equal<object>(expectedScreen, startScreen.ToString());
+        }
+
 
 
     }

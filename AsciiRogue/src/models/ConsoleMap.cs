@@ -91,6 +91,10 @@ namespace AsciiRogue
 
         public bool InteractWithObject(Vector2Int movementVector) {
             Vector2Int characterPos = GetCharacterPosition('@');
+            if (characterPos == null) {
+                Console.WriteLine("Warning: Interation with object failed to find the '@' player, so aborting.");
+                return false;
+            }
             Vector2Int destinationVector = characterPos + movementVector;
             String destinationSymbol = this[destinationVector.x, destinationVector.y];
 
