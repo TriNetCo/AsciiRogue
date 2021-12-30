@@ -175,10 +175,11 @@ namespace AsciiRogue
                 WriteSymbolToPoint(value, point);
             }
         }
+        
 
         /// <summary>Translate the mathy x,y format into the raster-based format
         /// </summary>
-        private int getActualY(int y) {
+        protected int getActualY(int y) {
             return lines.Length - 1 - y;
         }
 

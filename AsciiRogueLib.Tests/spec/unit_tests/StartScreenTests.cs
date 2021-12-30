@@ -95,6 +95,51 @@ namespace AsciiRogue.Tests
         }
 
 
+        [Fact]
+        public void we_can_render_the_multiplayer_screen()
+        {
+            // setup
+
+            StartScreen multiplayerScreen = new StartScreen();
+
+            string expectedScreen = 
+                    @"#########################
+                      #       Join Game       #
+                      #########################
+                      #                       #
+                      #  * Join Game          #
+                      #  - Host Private Game  #
+                      #  - Host Public Game   #
+                      #  - List Public Games  #
+                      #                       #
+                      #########################".TrimIndentation();
+
+
+            String button;
+            Vector2Int pos;
+            button = startScreen.GetCurrentButton();
+            pos = startScreen.GetCharacterPosition('*');
+
+            // excersise code
+            startScreen.Character.MoveDown();
+
+            pos = startScreen.GetCharacterPosition('*');
+            button = startScreen.GetCurrentButton();
+
+            startScreen.Character.MoveDown();
+
+            pos = startScreen.GetCharacterPosition('*');
+            button = startScreen.GetCurrentButton();
+
+            // Uhh.... so to "navigate" to a new screen, you press the enter key
+            // on the keyboard while the startScreen is waiting for input
+            // That triggers the start screen to end it's input handler loop by
+            // returning the button name to the calling function...
+            // There's no calling function in this test so...
+
+            // assertions
+            Assert.Equal<object>("multiplayer", button);
+        }
 
     }
 }

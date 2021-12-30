@@ -30,7 +30,7 @@ namespace AsciiRogue.menu
         public string GetCurrentButton() {
             var cursorPoint = GetCharacterPosition('*');
 
-            string line = lines[cursorPoint.y];
+            string line = lines[getActualY(cursorPoint.y)];
 
             return line.Replace('#', ' ').Replace('*', ' ').Trim().ToLower().Replace(' ', '_');
         }
